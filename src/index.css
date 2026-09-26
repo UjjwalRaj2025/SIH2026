@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased min-h-screen;
+    background-color: #f8fafc;
+  }
+
+  ::selection {
+    background-color: #0d9488;
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight text-slate-900;
+  }
+}
+
+/* Mountain contour ambient pattern */
+.bg-mountain-pattern {
+  background-image: radial-gradient(rgba(11, 26, 48, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle mountain topo contour accent */
+.bg-topo-dark {
+  background-color: #0b1a30;
+  background-image: radial-gradient(rgba(20, 184, 166, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Custom scrollbars for clean light & navy UI */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Leaflet map styles tailored for clean light theme cards */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  z-index: 10 !important;
+  background-color: #e2e8f0 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(11, 26, 48, 0.15);
+}
+
+.leaflet-popup-tip {
+  background-color: #ffffff !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #ffffff !important;
+  color: #0b1a30 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0d9488 !important;
+}
