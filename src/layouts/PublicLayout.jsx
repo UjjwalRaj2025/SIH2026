@@ -14,7 +14,7 @@ export default function PublicLayout() {
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full bg-mountain-pattern">
+      <main className="flex-1 w-full bg-slate-50">
         {isHomePage ? (
           <Outlet />
         ) : (

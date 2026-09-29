@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Navigation,
   MapPin,
@@ -25,31 +26,14 @@ import HazardRouteCard from '../../components/risk/HazardRouteCard';
 import SeverityBadge from '../../components/common/SeverityBadge';
 import Button from '../../components/common/Button';
 
-/**
- * JourneyRisk - Main Journey Risk Assessment & Safe Corridor Routing page.
- * Route: /journey-risk
- *
- * Page heading: "Plan Your Journey. Understand Your Risk."
- *
- * Form Steps:
- * - Step 1: From
- * - Step 2: To
- * - Step 3: Travel Date
- * - Step 4: Travel mode (Car, Bus, Bike, Walking)
- * - Button: "Assess Journey Risk"
- *
- * Result Section:
- * - Journey Risk: MODERATE
- * - Route map
- * - 5 Hazard Cards (Landslide, Cloudburst, GLOF, Crowd, Alerts) with status, risk level, short explanation
- * - "Important Alerts Along Your Route"
- * - "Recommended Precautions"
- */
 export default function JourneyRisk() {
+  const location = useLocation();
+
   // Form State
-  const [fromLocation, setFromLocation] = useState('Haridwar / Rishikesh');
-  const [toLocation, setToLocation] = useState('Kedarnath Dham');
+  const [fromLocation, setFromLocation] = useState(() => location.state?.fromLocation || 'Haridwar / Rishikesh');
+  const [toLocation, setToLocation] = useState(() => location.state?.toLocation || 'Kedarnath Dham');
   const [travelDate, setTravelDate] = useState(() => {
+    if (location.state?.travelDate) return location.state.travelDate;
     const today = new Date();
     return today.toISOString().split('T')[0];
   });
@@ -67,25 +51,47 @@ export default function JourneyRisk() {
     activeAdvisoriesCount: 2,
   });
 
-  // Mountain Origin Options
-  const originOptions = [
-    'Haridwar / Rishikesh',
-    'Dehradun (Jolly Grant / ISBT)',
-    'Delhi / NCR',
+  // Mountain Origin Options (Separated and expanded)
+  const baseOrigins = [
+    'Haridwar',
+    'Rishikesh',
+    'Dehradun (ISBT)',
+    'Dehradun (Jolly Grant Airport)',
+    'Delhi / NCR (ISBT Kashmere Gate)',
+    'Delhi (IGI Airport)',
+    'Chandigarh (ISBT 43)',
     'Haldwani / Kathgodam',
-    'Rudraprayag Confluence',
+    'Roorkee',
+    'Meerut',
+    'Saharanpur',
+    'Kotdwar',
+    'Devprayag',
     'Srinagar Garhwal',
+    'Rudraprayag',
+    'Karnaprayag',
   ];
+  const originOptions = fromLocation && !baseOrigins.includes(fromLocation)
+    ? [fromLocation, ...baseOrigins]
+    : baseOrigins;
 
   // Mountain Destination Options
-  const destinationOptions = [
+  const baseDestinations = [
     'Kedarnath Dham',
     'Badrinath Dham',
     'Gangotri Dham',
     'Yamunotri Dham',
-    'Hemkund Sahib / Valley of Flowers',
-    'Joshimath / Auli',
+    'Hemkund Sahib',
+    'Valley of Flowers',
+    'Joshimath',
+    'Auli',
+    'Tungnath / Chopta',
+    'Uttarkashi',
+    'Rishikesh',
+    'Haridwar',
   ];
+  const destinationOptions = toLocation && !baseDestinations.includes(toLocation)
+    ? [toLocation, ...baseDestinations]
+    : baseDestinations;
 
   // Travel Mode Cards
   const travelModes = [

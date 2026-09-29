@@ -4,21 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
   ShieldAlert,
-  Navigation,
-  User,
   PhoneCall,
-  ExternalLink,
   ChevronRight,
 } from 'lucide-react';
-import Button from '../common/Button';
 
 export default function MobileMenu({
   isOpen,
   onClose,
   navLinks = [],
-  onCheckRisk,
-  onSignIn,
-  user,
 }) {
   // Lock body scroll and listen for Escape key when drawer is open
   useEffect(() => {
@@ -118,40 +111,13 @@ export default function MobileMenu({
               </nav>
             </div>
 
-            {/* Drawer Bottom Actions */}
-            <div className="p-4 sm:p-5 border-t border-navy-800 space-y-3 bg-navy-950/70">
-              {/* Prominent Check Risk CTA Button */}
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onCheckRisk?.();
-                }}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white font-extrabold text-sm shadow-md shadow-teal-950/50 transition"
-              >
-                <Navigation className="w-4 h-4 text-teal-200" />
-                <span>Check Corridor Risk</span>
-              </button>
-
-              {/* User Account / Sign In */}
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onSignIn?.();
-                }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-navy-800 hover:bg-navy-700 text-slate-200 border border-navy-700 text-xs font-bold transition shadow-sm"
-              >
-                <User className="w-4 h-4 text-teal-400" />
-                <span>{user ? `Signed In (${user.name})` : 'Sign In / Account'}</span>
-              </button>
-
-              {/* Emergency Hotline Quick Access */}
-              <div className="pt-2 flex items-center justify-between text-xs text-slate-400">
-                <span>Emergency SEOC:</span>
+            {/* Drawer Bottom Actions: Emergency Hotline */}
+            <div className="p-4 sm:p-5 border-t border-navy-800 bg-navy-950/70">
+              <div className="flex items-center justify-between text-xs text-slate-400">
+                <span>Emergency SEOC Hotline:</span>
                 <a
                   href="tel:1070"
-                  className="flex items-center gap-1 text-red-400 font-extrabold hover:underline"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-950/60 border border-red-500/30 text-red-400 font-extrabold hover:bg-red-900/60 transition"
                 >
                   <PhoneCall className="w-3.5 h-3.5" />
                   <span>1070</span>
