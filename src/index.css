@@ -94,3 +94,26 @@
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
+
+/* Globally disable outline and focus rings on all buttons, links, and inputs */
+button,
+a,
+[role="button"] {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible,
+[role="button"]:focus,
+[role="button"]:focus-visible,
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-color: transparent !important;
+}

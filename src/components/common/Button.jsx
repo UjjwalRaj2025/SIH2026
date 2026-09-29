@@ -13,16 +13,16 @@ export default function Button({
   type = 'button',
   ...props
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 outline-none focus:outline-none focus:ring-0 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm';
 
   const variants = {
-    primary: 'bg-teal-700 hover:bg-teal-800 text-white focus:ring-teal-500 shadow-teal-900/10',
-    navy: 'bg-navy-900 hover:bg-navy-800 text-white focus:ring-navy-600 shadow-navy-900/20',
-    secondary: 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 focus:ring-slate-400',
-    danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-red-900/15',
-    warning: 'bg-amber-600 hover:bg-amber-700 text-white focus:ring-amber-500 shadow-amber-900/15',
-    outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus:ring-slate-400',
-    ghost: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 shadow-none focus:ring-slate-400',
+    primary: 'bg-teal-700 hover:bg-teal-800 text-white shadow-teal-900/10',
+    navy: 'bg-navy-900 hover:bg-navy-800 text-white shadow-navy-900/20',
+    secondary: 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-300',
+    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-red-900/15',
+    warning: 'bg-amber-600 hover:bg-amber-700 text-white shadow-amber-900/15',
+    outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900',
+    ghost: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 shadow-none',
   };
 
   const sizes = {

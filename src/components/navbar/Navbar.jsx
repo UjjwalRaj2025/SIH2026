@@ -34,7 +34,7 @@ export default function Navbar() {
             {/* Logo: CrisisGuard AI */}
             <Link
               to="/"
-              className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-xl"
+              className="flex items-center gap-2.5 sm:gap-3 group outline-none focus:outline-none focus:ring-0 rounded-xl select-none"
               aria-label="CrisisGuard AI Home"
             >
               <div className="p-2 rounded-xl bg-navy-800 border border-teal-500/40 text-teal-400 group-hover:border-teal-400 transition shadow-sm">
@@ -70,7 +70,7 @@ export default function Navbar() {
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-teal-400 ${
+                    className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition-all duration-150 outline-none focus:outline-none focus:ring-0 ${
                       isActive
                         ? 'bg-navy-800 text-teal-300 border border-teal-500/40 shadow-sm'
                         : 'text-slate-300 hover:text-white hover:bg-navy-800/60 border border-transparent'
@@ -91,7 +91,7 @@ export default function Navbar() {
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-teal-400 border ${
+                  `flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition-all duration-150 outline-none focus:outline-none focus:ring-0 border ${
                     isActive
                       ? 'bg-navy-800 text-teal-300 border-teal-500/40 shadow-sm'
                       : 'bg-navy-800/60 text-slate-300 hover:text-white hover:bg-navy-800 border-navy-700/80'
@@ -108,7 +108,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-navy-800 transition focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-navy-800 transition outline-none focus:outline-none focus:ring-0"
                 aria-label="Open mobile navigation menu"
                 aria-expanded={mobileMenuOpen}
               >
