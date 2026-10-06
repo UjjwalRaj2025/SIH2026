@@ -22,8 +22,6 @@ import {
   Check,
   ArrowRight,
   Navigation,
-  FileText,
-  Download,
 } from 'lucide-react';
 
 export default function About() {
@@ -175,28 +173,6 @@ export default function About() {
           Unified Multi-Hazard Early Warning & Situational Intelligence Platform for the Himalayan
           State of Uttarakhand and the Sacred Char Dham Pilgrim Circuit.
         </p>
-
-        {/* Downloadable Structured Map & Blueprint Buttons */}
-        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="/CrisisGuard_AI_Full_Project_Structured_Map.pdf"
-            download="CrisisGuard_AI_Full_Project_Structured_Map.pdf"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold transition shadow-card"
-          >
-            <Download className="w-4 h-4 text-teal-400" />
-            <span>Download Project Structured Map (PDF)</span>
-          </a>
-
-          <a
-            href="/CrisisGuard_AI_Project_Architecture_and_Structured_Map.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200 text-xs font-bold transition"
-          >
-            <FileText className="w-4 h-4 text-teal-600" />
-            <span>Open System Blueprint (Web & Print)</span>
-          </a>
-        </div>
       </div>
 
       {/* Problem Statement Context */}
