@@ -338,6 +338,26 @@ const REGION_TELEMETRY = {
   },
 };
 
+// Cinematic Hero Background Slides (Fade-in / Fade-out)
+const HERO_SLIDES = [
+  {
+    id: 'kedarnath',
+    src: '/kedarnath-hero.jpg',
+    alt: 'Shri Kedarnath Dham Temple in Garhwal Himalayas',
+    label: 'Kedarnath Dham',
+    location: "30°44'N 79°04'E | MANDAKINI VALLEY, UTTARAKHAND",
+    position: 'object-[65%_40%] lg:object-[68%_42%]',
+  },
+  {
+    id: 'himalaya',
+    src: '/himalaya-hero.jpg',
+    alt: 'Himalayan Mountain Ridge with Ancient Stupa and Prayer Flags',
+    label: 'Himalayan Ridge',
+    location: "30°18'N 79°01'E | HIMALAYAN REGION, INDIA",
+    position: 'object-[78%_35%] lg:object-[82%_38%]',
+  },
+];
+
 export default function Home() {
   const navigate = useNavigate();
   const [alerts, setAlerts] = useState([]);
@@ -349,6 +369,15 @@ export default function Home() {
     const today = new Date();
     return today.toISOString().split('T')[0];
   });
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  // Auto-advance hero background slides with smooth cross-fade every 6.5s
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 6500);
+    return () => clearInterval(slideTimer);
+  }, []);
 
   useEffect(() => {
     async function loadData() {
@@ -423,25 +452,39 @@ export default function Home() {
           1. HERO SECTION WITH HIMALAYAN MOUNTAIN RIDGE & EDITORIAL COLOR GRADING
          ========================================================================= */}
       <section className="relative w-full overflow-hidden bg-[#06121e] text-white border-b border-white/10 min-h-[calc(100vh-4rem)] flex flex-col justify-between">
-        {/* Cinematic Himalayan Mountain Vista Background Image */}
+        {/* Cinematic Multi-Slide Background with Fade In / Fade Out */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <img
-            src="/himalaya-hero.jpg"
-            alt="Himalayan Mountain Ridge with Ancient Stupa and Prayer Flags"
-            className="w-full h-full object-cover object-[78%_35%] lg:object-[82%_38%] select-none transform scale-105"
-          />
+          {HERO_SLIDES.map((slide, idx) => {
+            const isActive = activeHeroSlide === idx;
+            return (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  isActive ? 'opacity-100 z-[1]' : 'opacity-0 z-0'
+                }`}
+              >
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className={`w-full h-full object-cover select-none transition-transform duration-[8000ms] ease-out ${
+                    slide.position
+                  } ${isActive ? 'scale-105' : 'scale-100'}`}
+                />
+              </div>
+            );
+          })}
 
           {/* Color Grading Layer 1: Left-to-right deep dark slate/navy vignette for high text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#06121e] via-[#071624]/95 via-35% md:via-48% lg:via-52% to-[#0a1e30]/25 to-90%" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#06121e] via-[#071624]/95 via-35% md:via-48% lg:via-52% to-[#0a1e30]/30 to-90%" />
 
           {/* Color Grading Layer 2: Bottom fade into page background */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#06121e] via-[#06121e]/90 via-20% to-transparent to-60%" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-[#06121e] via-[#06121e]/90 via-20% to-transparent to-60%" />
 
           {/* Color Grading Layer 3: Top subtle blend under sticky navbar */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/80 via-transparent to-transparent to-30%" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-b from-[#0b1a30]/80 via-transparent to-transparent to-30%" />
 
           {/* Atmospheric Alpine tint */}
-          <div className="absolute inset-0 bg-navy-950/20 mix-blend-multiply" />
+          <div className="absolute inset-0 z-[2] bg-navy-950/20 mix-blend-multiply" />
         </div>
 
         {/* Hero Content Container */}
@@ -714,7 +757,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Bottom Hero Metadata Strip & Watermark */}
+          {/* Bottom Hero Metadata Strip & Watermark with Slide Controls */}
           <div className="border-t border-white/10 pt-5 mt-8 sm:mt-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-slate-300/85 font-medium items-center">
               <div className="flex items-center gap-2">
@@ -731,8 +774,27 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span>News claim verification</span>
               </div>
-              <div className="col-span-2 md:col-span-1 md:text-right font-mono text-[11px] text-slate-400 tracking-wider">
-                30°18'N 79°01'E | HIMALAYAN REGION, INDIA
+              <div className="col-span-2 md:col-span-1 flex items-center justify-between md:justify-end gap-3.5">
+                {/* Slide indicator pills with smooth fade selector */}
+                <div className="flex items-center gap-1.5 pointer-events-auto">
+                  {HERO_SLIDES.map((slide, idx) => (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      onClick={() => setActiveHeroSlide(idx)}
+                      className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer focus:outline-none focus:ring-0 active:outline-none ${
+                        activeHeroSlide === idx
+                          ? 'w-7 bg-teal-400 shadow-xs'
+                          : 'w-2 bg-white/30 hover:bg-white/60'
+                      }`}
+                      title={`Slide ${idx + 1}: ${slide.label}`}
+                      aria-label={`Slide ${idx + 1}: ${slide.label}`}
+                    />
+                  ))}
+                </div>
+                <span className="font-mono text-[11px] text-slate-400 tracking-wider">
+                  {HERO_SLIDES[activeHeroSlide]?.location}
+                </span>
               </div>
             </div>
           </div>
