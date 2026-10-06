@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/common/Card';
 import SeverityBadge from '../../components/common/SeverityBadge';
 import Button from '../../components/common/Button';
@@ -172,12 +173,12 @@ export default function GLOF() {
 
                 <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>Coordinates: {lake.coordinates[0]}° N, {lake.coordinates[1]}° E</span>
-                  <a
-                    href={`/risk-map`}
+                  <Link
+                    to="/journey-risk"
                     className="text-sky-700 hover:text-sky-800 font-bold"
                   >
-                    View on GIS Map &rarr;
-                  </a>
+                    Check Basin Route &rarr;
+                  </Link>
                 </div>
               </Card>
             );

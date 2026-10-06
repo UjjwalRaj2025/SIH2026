@@ -14,6 +14,7 @@ import {
   MOCK_ANALYTICS_DATA,
   DISTRICTS,
 } from '../data/mockDisasters';
+import { imdService } from './imdService';
 
 // Small helper to simulate realistic asynchronous network response
 const delay = (ms = 120) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -131,6 +132,7 @@ export const mockApiService = {
   // --- Geospatial Map Data ---
   async getRiskMapData() {
     await delay();
+    const imdData = await imdService.getCombinedIMDTelemetry();
     return {
       landslides: MOCK_LANDSLIDE_ZONES,
       cloudbursts: MOCK_CLOUDBURST_DATA,
@@ -138,6 +140,7 @@ export const mockApiService = {
       crowds: MOCK_CROWD_DATA,
       shelters: MOCK_SAFE_SHELTERS,
       alerts: MOCK_ALERTS,
+      imd: imdData,
     };
   },
 
@@ -161,3 +164,5 @@ export const mockApiService = {
     return [...DISTRICTS];
   },
 };
+
+export { imdService };

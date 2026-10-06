@@ -22,6 +22,8 @@ import {
   Check,
   ArrowRight,
   Navigation,
+  FileText,
+  Download,
 } from 'lucide-react';
 
 export default function About() {
@@ -61,7 +63,7 @@ export default function About() {
       title: 'Data Ingestion',
       category: 'Data',
       icon: Database,
-      description: 'Continuous streams from ISRO RISAT satellites, IMD Doppler radars, IoT slope inclinometers, and CWC river gauges.',
+      description: 'Continuous streams from ISRO RISAT satellites, IMD Doppler radars  CD FRO, and CWC river gauges.',
       color: 'text-sky-700 bg-sky-50 border-sky-200',
     },
     {
@@ -173,6 +175,28 @@ export default function About() {
           Unified Multi-Hazard Early Warning & Situational Intelligence Platform for the Himalayan
           State of Uttarakhand and the Sacred Char Dham Pilgrim Circuit.
         </p>
+
+        {/* Downloadable Structured Map & Blueprint Buttons */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="/CrisisGuard_AI_Full_Project_Structured_Map.pdf"
+            download="CrisisGuard_AI_Full_Project_Structured_Map.pdf"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold transition shadow-card"
+          >
+            <Download className="w-4 h-4 text-teal-400" />
+            <span>Download Project Structured Map (PDF)</span>
+          </a>
+
+          <a
+            href="/CrisisGuard_AI_Project_Architecture_and_Structured_Map.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200 text-xs font-bold transition"
+          >
+            <FileText className="w-4 h-4 text-teal-600" />
+            <span>Open System Blueprint (Web & Print)</span>
+          </a>
+        </div>
       </div>
 
       {/* Problem Statement Context */}
@@ -402,16 +426,16 @@ export default function About() {
       {/* =========================================================================
           SECTION 3: CRISISGUARD AI MISSION BANNER
          ========================================================================= */}
-      <section className="rounded-3xl bg-navy-900 p-8 sm:p-12 text-white text-center space-y-4 border border-navy-800 shadow-elevated">
+      <section className="rounded-3xl p-8 sm:p-12 text-white text-center space-y-4 border border-navy-800 shadow-elevated">
         <div className="max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-800 border border-teal-500/40 text-teal-300 text-xs font-bold">
             <ShieldAlert className="w-4 h-4 text-teal-400" />
             <span>CrisisGuard AI Mission</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+          <h3 className="text-2xl sm:text-2xl font-white tracking-tight">
             People • Preparedness • Technology • Resilience
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal pt-1">
+          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal pt-1">
             Engineered for Smart India Hackathon (SIH 2026) to protect pilgrims, residents, and mountain
             infrastructure with proactive artificial intelligence.
           </p>

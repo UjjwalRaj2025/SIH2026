@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navigation, MapPin, Search, AlertOctagon } from 'lucide-react';
+import { Navigation, Info, Search, AlertOctagon } from 'lucide-react';
 
 export default function QuickActions() {
   const actions = [
@@ -12,10 +12,10 @@ export default function QuickActions() {
       color: 'teal',
     },
     {
-      title: 'Interactive Risk Map',
-      description: 'Inspect live GIS multi-hazard overlays across Uttarakhand',
-      path: '/risk-map',
-      icon: MapPin,
+      title: 'Telemetry & Architecture',
+      description: 'Official MoES IMD & GSI BhuSanket sensor architecture',
+      path: '/about',
+      icon: Info,
       color: 'navy',
     },
     {

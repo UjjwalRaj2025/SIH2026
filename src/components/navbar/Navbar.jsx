@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import {
   ShieldAlert,
   Home,
-  MapPin,
   Navigation,
   Bell,
   CheckCircle2,
@@ -16,11 +15,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // The 5 specified primary navigation routes (Home, Journey Risk, Risk Map, Disaster News, Verify News)
+  // Primary navigation routes (Home, Journey Risk, Disaster News, Verify News)
   const navLinks = [
     { name: 'Home', path: '/', icon: Home, exact: true },
     { name: 'Journey Risk', path: '/journey-risk', icon: Navigation },
-    { name: 'Risk Map', path: '/risk-map', icon: MapPin },
     { name: 'Disaster News', path: '/alerts', icon: Bell },
     { name: 'Verify News', path: '/fake-news', icon: CheckCircle2 },
   ];

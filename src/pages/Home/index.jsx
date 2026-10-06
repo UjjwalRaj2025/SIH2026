@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   ShieldAlert,
   Navigation,
-  MapPin,
   Mountain,
   CloudRain,
   Waves,
@@ -30,7 +29,6 @@ import {
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
 import SeverityBadge from '../../components/common/SeverityBadge';
-import LeafletRiskMap from '../../components/map/LeafletRiskMap';
 import AlertItem from '../../components/alerts/AlertItem';
 import AlertModal from '../../components/alerts/AlertModal';
 import JourneyBriefingModal from '../../components/common/JourneyBriefingModal';
@@ -351,22 +349,11 @@ export default function Home() {
     const today = new Date();
     return today.toISOString().split('T')[0];
   });
-  const [mapData, setMapData] = useState({
-    landslides: [],
-    cloudbursts: [],
-    glof: [],
-    crowds: [],
-    shelters: [],
-  });
 
   useEffect(() => {
     async function loadData() {
-      const [alertsRes, mapRes] = await Promise.all([
-        mockApiService.getAlerts(),
-        mockApiService.getRiskMapData(),
-      ]);
+      const alertsRes = await mockApiService.getAlerts();
       setAlerts(alertsRes);
-      setMapData(mapRes);
     }
     loadData();
   }, []);
@@ -498,13 +485,13 @@ export default function Home() {
                   <Compass className="w-5 h-5 text-navy-950" />
                   <span>Check Journey Risk</span>
                 </button>
-                <Link to="/risk-map">
+                <Link to="/alerts">
                   <button
                     type="button"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-base border border-white/20 backdrop-blur-md shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-150"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-base border border-white/20 backdrop-blur-md shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 cursor-pointer"
                   >
-                    <MapPin className="w-4 h-4 text-teal-300" />
-                    <span>Explore Risk Map ↗</span>
+                    <Bell className="w-4 h-4 text-teal-300" />
+                    <span>Live Disaster Alerts ↗</span>
                   </button>
                 </Link>
               </div>
@@ -831,7 +818,36 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16 sm:space-y-24">
 
         {/* =========================================================================
-            3. LIVE RISK OVERVIEW (MOCK STATISTICS)
+            6. LATEST ALERTS (3-5 MOCK ALERT CARDS)
+           ========================================================================= */}
+        <section className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+            <div>
+              <span className="text-xs font-extrabold uppercase tracking-widest text-red-700 block">
+                Emergency Broadcast Feed
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                Latest Alerts
+              </h2>
+            </div>
+            <Link
+              to="/alerts"
+              className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5 focus:outline-none"
+            >
+              <span>View All ({alerts.length}) Alerts</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {alerts.slice(0, 3).map((alt) => (
+              <AlertItem key={alt.id} alert={alt} onSelect={setSelectedAlert} />
+            ))}
+          </div>
+        </section>
+
+        {/* =========================================================================
+            7. LIVE RISK OVERVIEW (MOCK STATISTICS - JUST ABOVE FOOTER)
            ========================================================================= */}
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
@@ -845,7 +861,7 @@ export default function Home() {
             </div>
             <Link
               to="/dashboard"
-              className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5"
+              className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5 focus:outline-none"
             >
               <span>Open Situational Dashboard</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -854,7 +870,8 @@ export default function Home() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-card text-center space-y-1">
-              <span className="text-3xl font-black text-slate-900 font-mono block"></span>
+              <span className="text-3xl font-black text-slate-900 font-mono block">148</span>
+              <span className="text-xs font-bold text-slate-700 block">Active IoT Sensors</span>
               <span className="text-[11px] text-teal-700 font-medium block">Slope tilt & river gauges</span>
             </div>
 
@@ -881,70 +898,6 @@ export default function Home() {
               <span className="text-xs font-bold text-slate-700 block">Prediction Uptime</span>
               <span className="text-[11px] text-emerald-700 font-medium block">Zero sensor lag</span>
             </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            6. LATEST ALERTS (3-5 MOCK ALERT CARDS)
-           ========================================================================= */}
-        <section className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-            <div>
-              <span className="text-xs font-extrabold uppercase tracking-widest text-red-700 block">
-                Emergency Broadcast Feed
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                Latest Alerts
-              </h2>
-            </div>
-            <Link
-              to="/alerts"
-              className="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5"
-            >
-              <span>View All ({alerts.length}) Alerts</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {alerts.slice(0, 3).map((alt) => (
-              <AlertItem key={alt.id} alert={alt} onSelect={setSelectedAlert} />
-            ))}
-          </div>
-        </section>
-
-        {/* =========================================================================
-            7. EXPLORE UTTARAKHAND RISK MAP (MAP PREVIEW)
-           ========================================================================= */}
-        <section className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-            <div>
-              <span className="text-xs font-extrabold uppercase tracking-widest text-teal-700 block">
-                GIS Geospatial Viewer
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                Explore Uttarakhand Risk Map
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">
-                Live multi-layer geospatial preview with safe corridors, shelters, and hazard perimeters.
-              </p>
-            </div>
-            <Link to="/risk-map">
-              <Button variant="navy" size="sm" icon={Layers}>
-                Open Fullscreen GIS Map
-              </Button>
-            </Link>
-          </div>
-
-          <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card">
-            <LeafletRiskMap
-              landslides={mapData.landslides}
-              cloudbursts={mapData.cloudbursts}
-              glof={mapData.glof}
-              crowds={mapData.crowds}
-              shelters={mapData.shelters}
-              height="480px"
-            />
           </div>
         </section>
         </div>

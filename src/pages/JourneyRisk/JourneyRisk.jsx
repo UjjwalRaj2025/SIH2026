@@ -10,7 +10,6 @@ import {
   Footprints,
   Compass,
   ShieldCheck,
-  AlertTriangle,
   Clock,
   CheckCircle2,
   Share2,
@@ -351,7 +350,6 @@ export default function JourneyRisk() {
           - Journey Risk: MODERATE
           - Route Map
           - 5 Hazard Breakdown Cards (Landslide, Cloudburst, GLOF, Crowd, Alerts)
-          - Important Alerts Along Your Route
           - Recommended Precautions
          ========================================================================= */}
       <div id="assessment-result-section" className="space-y-8 animate-in fade-in duration-300">
@@ -566,88 +564,6 @@ export default function JourneyRisk() {
               <div className="pt-2 border-t border-navy-800 flex items-center justify-between text-xs text-slate-400">
                 <span className="font-mono">Helpline: 1070 (SEOC)</span>
                 <span className="text-teal-400 font-bold">Verified Route</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
-            "Important Alerts Along Your Route"
-           ========================================================================= */}
-        <section className="bg-white rounded-3xl border border-slate-200 shadow-card p-6 sm:p-8 space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-red-600" />
-              <h3 className="font-black text-base sm:text-lg text-slate-900 tracking-tight">
-                Important Alerts Along Your Route
-              </h3>
-            </div>
-            <span className="px-2.5 py-1 rounded-full bg-red-50 text-red-700 border border-red-200 text-xs font-extrabold">
-              3 Active Advisories
-            </span>
-          </div>
-
-          <div className="space-y-3.5">
-            {/* Alert 1 */}
-            <div className="p-4 rounded-2xl bg-red-50/60 border border-red-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <SeverityBadge level="CRITICAL" label="CRITICAL ROADWORK" size="sm" pulse />
-                  <span className="text-xs font-bold text-red-950">
-                    NH-07 Lambagar Single-Lane Convoy Operating
-                  </span>
-                </div>
-                <p className="text-xs text-slate-700 leading-relaxed">
-                  BRO heavy earthmovers on standby. Rockfall debris cleared for 1-lane alternating vehicular convoy. Expect 30-45 minute holding delays.
-                </p>
-              </div>
-              <div className="text-right shrink-0">
-                <span className="text-[11px] font-mono font-bold text-red-800 block">
-                  BRO / SDRF Chamoli
-                </span>
-                <span className="text-[10px] text-slate-500">12 mins ago</span>
-              </div>
-            </div>
-
-            {/* Alert 2 */}
-            <div className="p-4 rounded-2xl bg-amber-50/60 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <SeverityBadge level="HIGH" label="HIGH CAUTION" size="sm" />
-                  <span className="text-xs font-bold text-amber-950">
-                    Mandakini Riverside Camping & Bathing Prohibited
-                  </span>
-                </div>
-                <p className="text-xs text-slate-700 leading-relaxed">
-                  Upstream rainfall spike in Kedarnath peaks has increased Mandakini river velocity. Local administration has ordered complete clearing of riverbed tents.
-                </p>
-              </div>
-              <div className="text-right shrink-0">
-                <span className="text-[11px] font-mono font-bold text-amber-800 block">
-                  DEOC Rudraprayag
-                </span>
-                <span className="text-[10px] text-slate-500">28 mins ago</span>
-              </div>
-            </div>
-
-            {/* Alert 3 */}
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <SeverityBadge level="MODERATE" label="TIME RESTRICTION" size="sm" />
-                  <span className="text-xs font-bold text-slate-900">
-                    Night Vehicular Travel Curfew on Sonprayag-Gaurikund Link
-                  </span>
-                </div>
-                <p className="text-xs text-slate-700 leading-relaxed">
-                  No vehicular movement permitted between 20:00 and 05:00 IST to prevent shooting stone casualties during darkness. Pilgrims must halt at Sonprayag.
-                </p>
-              </div>
-              <div className="text-right shrink-0">
-                <span className="text-[11px] font-mono font-bold text-slate-700 block">
-                  Uttarakhand Police
-                </span>
-                <span className="text-[10px] text-slate-500">1 hour ago</span>
               </div>
             </div>
           </div>

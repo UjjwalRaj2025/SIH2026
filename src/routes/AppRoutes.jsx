@@ -6,7 +6,6 @@ import AuthorityLayout from '../layouts/AuthorityLayout';
 // Public App Pages
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
-import RiskMap from '../pages/RiskMap';
 import JourneyRisk from '../pages/JourneyRisk';
 import Landslide from '../pages/Landslide';
 import Cloudburst from '../pages/Cloudburst';
@@ -26,7 +25,7 @@ export default function AppRoutes() {
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/risk-map" element={<RiskMap />} />
+        <Route path="/risk-map" element={<Navigate to="/" replace />} />
         <Route path="/journey-risk" element={<JourneyRisk />} />
         <Route path="/landslide" element={<Landslide />} />
         <Route path="/cloudburst" element={<Cloudburst />} />

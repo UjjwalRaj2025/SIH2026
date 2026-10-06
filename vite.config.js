@@ -5,7 +5,15 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true
+    open: true,
+    proxy: {
+      '/api/imd': {
+        target: 'https://api.imd.gov.in/api/v1',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api\/imd/, ''),
+      },
+    },
   },
   resolve: {
     alias: {
